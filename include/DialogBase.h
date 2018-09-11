@@ -22,7 +22,7 @@
 
 using namespace std;
 
-extern SDL_Surface *mainSurface; // указатель на главную поверхность
+extern SDL_Surface *mainSurface; // СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РіР»Р°РІРЅСѓСЋ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ
 extern char * mainTTFname;
 extern SDL_Rect wall;
 int Quit();
@@ -38,13 +38,13 @@ public:
     virtual int Draw()=0;
     virtual int EventFilter()=0;
 protected:
-    SDL_Surface *urgentSurface, *background; // актуальная поверхность, фон
+    SDL_Surface *urgentSurface, *background; // Р°РєС‚СѓР°Р»СЊРЅР°СЏ РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ, С„РѕРЅ
     Uint32 Rmask, Gmask, Bmask;
-    Font *fontPointer; // указатель на поверхность с текстом
+    Font *fontPointer; // СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїРѕРІРµСЂС…РЅРѕСЃС‚СЊ СЃ С‚РµРєСЃС‚РѕРј
     SDL_Color text_color;
 };
 
-// Запуск игры
+// Р—Р°РїСѓСЃРє РёРіСЂС‹
 class Run: public DialogBase {
 public:
     Run();
@@ -55,7 +55,7 @@ public:
 private:
 
 };
-// Заставка
+// Р—Р°СЃС‚Р°РІРєР°
 class Saver: public DialogBase {
 public:
     Saver();
@@ -96,10 +96,10 @@ public:
     int Draw();
     int EventFilter();
 private:
-    int ChooseAction(); // Выбор действия
-    int currentPosInMenu, numOfElements; // текущий пункт меню, количество элементов в меню
-    char * menuElemets[5], *menuName; // указатели на текст, который будет отображаться в меню в кодировке UTF8
-    Font * menuFont[5], *menuNameFont, *menuFontSelect[5], *playerNameFont; // Указатели на поверхности текстовых объектов
+    int ChooseAction(); // Р’С‹Р±РѕСЂ РґРµР№СЃС‚РІРёСЏ
+    int currentPosInMenu, numOfElements; // С‚РµРєСѓС‰РёР№ РїСѓРЅРєС‚ РјРµРЅСЋ, РєРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ РІ РјРµРЅСЋ
+    char * menuElemets[5], *menuName; // СѓРєР°Р·Р°С‚РµР»Рё РЅР° С‚РµРєСЃС‚, РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ РѕС‚РѕР±СЂР°Р¶Р°С‚СЊСЃСЏ РІ РјРµРЅСЋ РІ РєРѕРґРёСЂРѕРІРєРµ UTF8
+    Font * menuFont[5], *menuNameFont, *menuFontSelect[5], *playerNameFont; // РЈРєР°Р·Р°С‚РµР»Рё РЅР° РїРѕРІРµСЂС…РЅРѕСЃС‚Рё С‚РµРєСЃС‚РѕРІС‹С… РѕР±СЉРµРєС‚РѕРІ
     char *playerName;
     int EnterName();
     Results *allRES;
@@ -128,7 +128,7 @@ public:
 };
 
 
-// Класс, работающий с шрифтом, текстом и его отрисовкой на поверхности
+// РљР»Р°СЃСЃ, СЂР°Р±РѕС‚Р°СЋС‰РёР№ СЃ С€СЂРёС„С‚РѕРј, С‚РµРєСЃС‚РѕРј Рё РµРіРѕ РѕС‚СЂРёСЃРѕРІРєРѕР№ РЅР° РїРѕРІРµСЂС…РЅРѕСЃС‚Рё
 class Font {
 public:
     ~Font();

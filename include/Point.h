@@ -17,7 +17,7 @@ class Point {
         SDL_Surface *urgentSurface;
         SDL_Rect objRectData, posOnScreen;
         bool changes;
-        int xVel,yVel; //  velocity - скорость перемещения кадр/секунда
+        int xVel,yVel; //  velocity - СЃРєРѕСЂРѕСЃС‚СЊ РїРµСЂРµРјРµС‰РµРЅРёСЏ РєР°РґСЂ/СЃРµРєСѓРЅРґР°
 };
 
 class Hunter: public Point {

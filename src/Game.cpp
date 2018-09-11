@@ -9,7 +9,7 @@ Game::Game(){
     Gmask = mainSurface->format->Gmask;
     Bmask = mainSurface->format->Bmask;
 
-    // Фон игры, используется одна бесшовная картинка и распределяется по поверхности
+    // Р¤РѕРЅ РёРіСЂС‹, РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РѕРґРЅР° Р±РµСЃС€РѕРІРЅР°СЏ РєР°СЂС‚РёРЅРєР° Рё СЂР°СЃРїСЂРµРґРµР»СЏРµС‚СЃСЏ РїРѕ РїРѕРІРµСЂС…РЅРѕСЃС‚Рё
     SDL_Surface* tmpImgSurf = IMG_Load("background.gif");
     SDL_Rect tmpObjRectData = {0,0,200,200};
     background = SDL_CreateRGBSurface(SDL_SWSURFACE|SDL_SRCALPHA,WINDOW_W, WINDOW_H, 32,Rmask, Gmask, Bmask, 0);
@@ -21,8 +21,8 @@ Game::Game(){
         }
     SDL_FreeSurface(tmpImgSurf);
     tmpImgSurf = NULL;
-    // Герои игры
-    hunterHero = new Hunter; // Охотник
+    // Р“РµСЂРѕРё РёРіСЂС‹
+    hunterHero = new Hunter; // РћС…РѕС‚РЅРёРє
     text_color = {255,255,255,0};
 }
 
@@ -54,8 +54,8 @@ Game::~Game(){
 int
 Game::Launch(){
     Tips SaverTip;
-    //Убейте как можно больше кроликов. Клавиши вверх/вниз — перемещение охотника. Пробел — выстрел. Esc — пауза.
-    SaverTip.ChangeTipText("РЈР±РµР№С‚Рµ РєР°Рє РјРѕР¶РЅРѕ Р±РѕР»СЊС€Рµ РєСЂРѕР»РёРєРѕРІ. РљР»Р°РІРёС€Рё РІРІРµСЂС…/РІРЅРёР· вЂ” РїРµСЂРµРјРµС‰РµРЅРёРµ РѕС…РѕС‚РЅРёРєР°. РџСЂРѕР±РµР» вЂ” РІС‹СЃС‚СЂРµР». Esc вЂ” РїР°СѓР·Р°.");
+    //РЈР±РµР№С‚Рµ РєР°Рє РјРѕР¶РЅРѕ Р±РѕР»СЊС€Рµ РєСЂРѕР»РёРєРѕРІ. РљР»Р°РІРёС€Рё РІРІРµСЂС…/РІРЅРёР· вЂ” РїРµСЂРµРјРµС‰РµРЅРёРµ РѕС…РѕС‚РЅРёРєР°. РџСЂРѕР±РµР» вЂ” РІС‹СЃС‚СЂРµР». Esc вЂ” РїР°СѓР·Р°.
+    SaverTip.ChangeTipText("Р Р€Р В±Р ВµР в„–РЎвЂљР Вµ Р С”Р В°Р С” Р СР С•Р В¶Р Р…Р С• Р В±Р С•Р В»РЎРЉРЎв‚¬Р Вµ Р С”РЎР‚Р С•Р В»Р С‘Р С”Р С•Р Р†. Р С™Р В»Р В°Р Р†Р С‘РЎв‚¬Р С‘ Р Р†Р Р†Р ВµРЎР‚РЎвЂ¦/Р Р†Р Р…Р С‘Р В· РІР‚вЂќ Р С—Р ВµРЎР‚Р ВµР СР ВµРЎвЂ°Р ВµР Р…Р С‘Р Вµ Р С•РЎвЂ¦Р С•РЎвЂљР Р…Р С‘Р С”Р В°. Р СџРЎР‚Р С•Р В±Р ВµР В» РІР‚вЂќ Р Р†РЎвЂ№РЎРѓРЎвЂљРЎР‚Р ВµР В». Esc РІР‚вЂќ Р С—Р В°РЎС“Р В·Р В°.");
     return EventFilter();
 }
 
@@ -73,23 +73,23 @@ Game::Draw(){
 int
 Game::EventFilter(){
     bool nextstep = true;
-    int frame = 0, numOfBullets=0, numOfAllBunnies=0;; // счётчик кадров
+    int frame = 0, numOfBullets=0, numOfAllBunnies=0;; // СЃС‡С‘С‚С‡РёРє РєР°РґСЂРѕРІ
     int timeInSeconds=0, maxBunnies = 2, random, currentBunniesInPeriod, TimeForTTFDraw;
-    Timer fps, game; // таймер используемый для вычисления количества кадров в секунду
+    Timer fps, game; // С‚Р°Р№РјРµСЂ РёСЃРїРѕР»СЊР·СѓРµРјС‹Р№ РґР»СЏ РІС‹С‡РёСЃР»РµРЅРёСЏ РєРѕР»РёС‡РµСЃС‚РІР° РєР°РґСЂРѕРІ РІ СЃРµРєСѓРЅРґСѓ
     SDL_Event event;
     SDL_EnableKeyRepeat(1,10);
     char ttext[10] = "0";
     char tmpText[10] = "";
     fontPointer = new Font(0,0, 19, mainTTFname, ttext, &text_color);
     Font *fontForScore = new Font(0,22, 19, mainTTFname, ttext, &text_color);
-    game.start(); // таймер игры
+    game.start(); // С‚Р°Р№РјРµСЂ РёРіСЂС‹
     srand(time(NULL)); //
     int timeDelta=4;
 
     while(nextstep)
     {
         fps.start();
-// ---------------------->> СОБЫТИЯ <<----------------------
+// ---------------------->> РЎРћР‘Р«РўРРЇ <<----------------------
         if(SDL_PollEvent(&event)){
             switch(event.type)
             {
@@ -122,11 +122,11 @@ Game::EventFilter(){
 
             } // switch
         }// if
-// ---------------------->> ЛОГИКА <<----------------------
+// ---------------------->> Р›РћР“РРљРђ <<----------------------
         gameTime = 60-game.get_ticks()/1000;
         for(list<Point*>::iterator itBullet = listOfBullets.begin();
             itBullet != listOfBullets.end(); ++itBullet){
-            if((*itBullet)->Move(true)) // движение пули
+            if((*itBullet)->Move(true)) // РґРІРёР¶РµРЅРёРµ РїСѓР»Рё
             {
                 list<Point*>::iterator tmp = itBullet;
                 tmp--;
@@ -138,11 +138,11 @@ Game::EventFilter(){
                 itBunny != listOfBunnies.end(); ++itBunny){
                     if(Collision((*itBullet)->GetPosOnScreen(), (*itBunny)->GetPosOnScreen()))
                     {
-                        list<Point*>::iterator tmp = itBullet; // устанавливаем временный итератор на итератор Пуль
-                        tmp--; // переходим к следующему элементу
-                        delete *itBullet, listOfBullets.erase(itBullet); // удаляем пулю из списка и из памяти
-                        itBullet = tmp; // присваеваем итератору пули указатель на следующую пулю
-                        tmp = itBunny; // аналогично и с кроликом
+                        list<Point*>::iterator tmp = itBullet; // СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РІСЂРµРјРµРЅРЅС‹Р№ РёС‚РµСЂР°С‚РѕСЂ РЅР° РёС‚РµСЂР°С‚РѕСЂ РџСѓР»СЊ
+                        tmp--; // РїРµСЂРµС…РѕРґРёРј Рє СЃР»РµРґСѓСЋС‰РµРјСѓ СЌР»РµРјРµРЅС‚Сѓ
+                        delete *itBullet, listOfBullets.erase(itBullet); // СѓРґР°Р»СЏРµРј РїСѓР»СЋ РёР· СЃРїРёСЃРєР° Рё РёР· РїР°РјСЏС‚Рё
+                        itBullet = tmp; // РїСЂРёСЃРІР°РµРІР°РµРј РёС‚РµСЂР°С‚РѕСЂСѓ РїСѓР»Рё СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃР»РµРґСѓСЋС‰СѓСЋ РїСѓР»СЋ
+                        tmp = itBunny; // Р°РЅР°Р»РѕРіРёС‡РЅРѕ Рё СЃ РєСЂРѕР»РёРєРѕРј
                         tmp--;
                         delete *itBunny, listOfBunnies.erase(itBunny);
                         itBunny = tmp;
@@ -177,11 +177,11 @@ Game::EventFilter(){
             if(gameTime==0) nextstep=false;
         }
 
-// ---------------------->> ОТРИСОВКА <<----------------------
+// ---------------------->> РћРўР РРЎРћР’РљРђ <<----------------------
         Draw();
 
-        fontPointer->Draw(mainSurface); // отрисовка обратного отсчета
-        fontForScore->Draw(mainSurface); // отображение количества убитых кроликов
+        fontPointer->Draw(mainSurface); // РѕС‚СЂРёСЃРѕРІРєР° РѕР±СЂР°С‚РЅРѕРіРѕ РѕС‚СЃС‡РµС‚Р°
+        fontForScore->Draw(mainSurface); // РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РєРѕР»РёС‡РµСЃС‚РІР° СѓР±РёС‚С‹С… РєСЂРѕР»РёРєРѕРІ
          //Update the screen
         if( SDL_Flip( mainSurface ) == -1 ) return 1;
 

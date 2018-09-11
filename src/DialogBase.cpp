@@ -64,9 +64,9 @@ Run::Run(){
         Rmask = mainSurface->format->Rmask;
         Gmask = mainSurface->format->Gmask;
         Bmask = mainSurface->format->Bmask;
-        // ������ ��������� ���� � ������
-        SDL_WM_SetCaption("Охотник", NULL); // ������ ��� �������
-        // ��������� ��������
+        // Задаем заголовок окна и иконку
+        SDL_WM_SetCaption("РћС…РѕС‚РЅРёРє", NULL); // Дракон над городом
+        // Запускаем заставку
         {Saver* MySaver = new Saver(); delete MySaver;}
 
             Menu MyMenu;
@@ -81,7 +81,7 @@ Menu::EnterName(){
     Gmask = mainSurface->format->Gmask;
     Bmask = mainSurface->format->Bmask;
     Tips SaverTip;
-    SaverTip.ChangeTipText("используйте латинскую раскладку клавиатуры.");
+    SaverTip.ChangeTipText("РёСЃРїРѕР»СЊР·СѓР№С‚Рµ Р»Р°С‚РёРЅСЃРєСѓСЋ СЂР°СЃРєР»Р°РґРєСѓ РєР»Р°РІРёР°С‚СѓСЂС‹.");
     StringInput name;
 
     background =SDL_CreateRGBSurface(SDL_SWSURFACE|SDL_SRCALPHA,WINDOW_W, WINDOW_H, 32,Rmask, Gmask, Bmask, 0xFF000000);
@@ -90,7 +90,7 @@ Menu::EnterName(){
     SDL_Surface* tmp2 =SDL_CreateRGBSurface(SDL_SWSURFACE|SDL_SRCALPHA,WINDOW_W, WINDOW_H, 32,Rmask, Gmask, Bmask, 0xFF000000);
     Draw_FillRect(tmp2,WINDOW_W/2-200,WINDOW_H/2-100, 400, 200, SDL_MapRGBA(background->format, 255, 255, 255,200));
     SDL_BlitSurface(tmp2,NULL, background, NULL);
-    char enterTheName[] = "Введите свое имя:";
+    char enterTheName[] = "Р’РІРµРґРёС‚Рµ СЃРІРѕРµ РёРјСЏ:";
     SDL_Color txtColor = {0,0,0,0};
     Font* message = new Font(WINDOW_W/2-200, WINDOW_H/2-100, 20,mainTTFname, enterTheName,&txtColor);
     message->Draw(background);
@@ -138,27 +138,27 @@ Run::~Run(){
 
 Saver::Saver(){
     text_color = {255,255,255,0};
-    // ���
+    // ФОН
     SDL_Surface* tmpImgSurf = IMG_Load("saver.gif");
     SDL_BlitSurface(tmpImgSurf, NULL, mainSurface, NULL);
-    // �����
-    char ttext[50] = "Охотник на кролика"; // ������� �� ���������
+    // ТЕКСТ
+    char ttext[50] = "РћС…РѕС‚РЅРёРє РЅР° РєСЂРѕР»РёРєР°"; // Охотник за кроликами
     fontPointer = new Font(WINDOW_W/4+10,WINDOW_H-100, 30, mainTTFname, ttext, &text_color);
     fontPointer->Draw(mainSurface);
     delete fontPointer;
-    strcpy(ttext, "Курсовая работа"); // �������� ������
+    strcpy(ttext, "РљСѓСЂСЃРѕРІР°СЏ СЂР°Р±РѕС‚Р°"); // Курсовая работа
     Font * coursWork = new Font(WINDOW_W/3+10,60, 24, mainTTFname, ttext, &text_color);
     coursWork->Draw(mainSurface);
     delete coursWork;
-    strcpy(ttext, "Фёдорова Д.О. и954"); // �������� �.�. �954
+    strcpy(ttext, "Р¤С‘РґРѕСЂРѕРІР° Р”.Рћ. Рё954"); // Федорова Д.О. И954
     coursWork = new Font(WINDOW_W-220,8, 17, mainTTFname, ttext, &text_color);
     if(mainSurface) coursWork->Draw(mainSurface);
     delete coursWork;
 
     Tips SaverTip;
-    SaverTip.ChangeTipText("2016. � оссия, СПб, БГТУ «ВОЕНМЕХ», кафедра и9 /// Загрузка игры..."); // ��������...
+    SaverTip.ChangeTipText("2016. Р РѕСЃСЃРёСЏ, РЎРџР±, Р‘Р“РўРЈ В«Р’РћР•РќРњР•РҐВ», РєР°С„РµРґСЂР° Рё9 /// Р—Р°РіСЂСѓР·РєР° РёРіСЂС‹..."); // Загрузка...
 
-    SDL_Flip(mainSurface); // ����������, ��� ����������� �������� ����������� �� ������
+    SDL_Flip(mainSurface); // обновление, для отображения основной поверхности на экране
     SDL_Delay(5000);
     SDL_FreeSurface(tmpImgSurf);
 
@@ -175,24 +175,24 @@ Menu::Menu(){
     for(int i=0; i<numOfElements; i++)
         menuElemets[i] = new char[30];
 
-    strcpy(menuName, "Меню"); // ����
-    strcpy(menuElemets[0], "Новая игра"); // ����� ����
-    strcpy(menuElemets[1], "Правила"); // �������
-    strcpy(menuElemets[2], "� езультаты"); // ����������
-    strcpy(menuElemets[3], "Смена игрока"); // ����� ������
-    strcpy(menuElemets[4], "Выйти"); // �����
+    strcpy(menuName, "РњРµРЅСЋ"); // Меню
+    strcpy(menuElemets[0], "РќРѕРІР°СЏ РёРіСЂР°"); // Новая игра
+    strcpy(menuElemets[1], "РџСЂР°РІРёР»Р°"); // Правила
+    strcpy(menuElemets[2], "Р РµР·СѓР»СЊС‚Р°С‚С‹"); // Результаты
+    strcpy(menuElemets[3], "РЎРјРµРЅР° РёРіСЂРѕРєР°"); // Смена игрока
+    strcpy(menuElemets[4], "Р’С‹Р№С‚Рё"); // Выйти
     strcpy(playerName, "");
-    // ���
+    // ФОН
     background = IMG_Load("saver.gif");
 
-    // ������� ������� ������� ��� ��������� �� �����������
+    // Создаем оюъекты текстов для отрисовки на поверхности
     menuNameFont = new Font(0,0, 20, mainTTFname, menuName, &text_color_menu);
     playerNameFont = new Font (WINDOW_W-200, 10,20, mainTTFname, playerName, &text_color_menu);
     for(int i=0; i<numOfElements; i++){
         menuFont[i] = new Font(0,20*i+20, 18, mainTTFname, menuElemets[i], &text_color);
         menuFontSelect[i] = new Font(0,20*i+20, 18, mainTTFname, menuElemets[i], &select_text_color);
     }
-    currentPosInMenu = 0; // �� "������ ����"
+    currentPosInMenu = 0; // на "Начать игру"
 }
 
 int
@@ -202,7 +202,7 @@ Menu::Launch(){
     allRES->ReadResults();
     playerNameFont->ChangeText(playerName);
     Tips SaverTip;
-            SaverTip.ChangeTipText("Для передвижения по меню используйте клавиши: вверх/вниз.");
+            SaverTip.ChangeTipText("Р”Р»СЏ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ РїРѕ РјРµРЅСЋ РёСЃРїРѕР»СЊР·СѓР№С‚Рµ РєР»Р°РІРёС€Рё: РІРІРµСЂС…/РІРЅРёР·.");
     EventFilter();
     return 0;
 }
@@ -216,14 +216,14 @@ Menu::Draw(){
         Bmask = mainSurface->format->Bmask;
         urgentSurface = SDL_CreateRGBSurface(SDL_SWSURFACE|SDL_SRCALPHA,WINDOW_W, WINDOW_H, 32,Rmask, Gmask, Bmask, 0);
     }
-    SDL_BlitSurface(background, NULL, urgentSurface, NULL); // ��������� ����
-    playerNameFont->Draw(urgentSurface); // ��������� ����� ������
-    menuNameFont->Draw(urgentSurface); // ��������� "����"
+    SDL_BlitSurface(background, NULL, urgentSurface, NULL); // отрисовка фона
+    playerNameFont->Draw(urgentSurface); // отрисовка имени игрока
+    menuNameFont->Draw(urgentSurface); // отрисовка "меню"
     for(int i=0; i<numOfElements; i++)
         if(currentPosInMenu == i)
-            menuFontSelect[i]->Draw(urgentSurface);// ��������� ����������� �������� ����
+            menuFontSelect[i]->Draw(urgentSurface);// отрисовка выделенного элемента меню
         else
-            menuFont[i]->Draw(urgentSurface); // ��������� �������� ����
+            menuFont[i]->Draw(urgentSurface); // отрисовка элемента меню
     if(mainSurface) SDL_BlitSurface(urgentSurface, NULL, mainSurface, NULL);
     return 0;
 }
@@ -231,13 +231,13 @@ Menu::Draw(){
 int
 Menu::EventFilter(){
     bool nextstep = true;
-    Timer fps; // ������ ������������ ��� ���������� ���������� ������ � �������
+    Timer fps; // таймер используемый для вычисления количества кадров в секунду
     SDL_Event event;
     SDL_EnableKeyRepeat(1,10);
     while(nextstep)
     {
         fps.start();
-// ---------------------->> ������� <<----------------------
+// ---------------------->> СОБЫТИЯ <<----------------------
         if(SDL_PollEvent(&event)){
             switch(event.type)
             {
@@ -268,10 +268,10 @@ Menu::EventFilter(){
 
             } // switch
         }// if
-// ---------------------->> ������ <<----------------------
+// ---------------------->> ЛОГИКА <<----------------------
 
 
-// ---------------------->> ��������� <<----------------------
+// ---------------------->> ОТРИСОВКА <<----------------------
         Draw();
         if( SDL_Flip( mainSurface ) == -1 ) return 1;
         if( fps.get_ticks() < 1000 / FRAMES_PER_SECOND ) SDL_Delay( ( 1000 / FRAMES_PER_SECOND ) - fps.get_ticks() );
@@ -287,7 +287,7 @@ Menu::ChooseAction(){
     if (currentPosInMenu == numOfElements-1) return 1;
     switch(currentPosInMenu)
     {
-        case 0: // ����� ����
+        case 0: // Новая игра
             {
                 Game HunterGame;
                 int tmpRes;
@@ -295,23 +295,23 @@ Menu::ChooseAction(){
                 allRES->NewResult(playerName, tmpRes);
                 }
             break;
-        case 1: // �������
+        case 1: // Правила
             {
                 Rules *gameReules = new Rules;
                 delete gameReules;
             }
             break;
-        case 2: // ����������
+        case 2: // Результаты
             allRES->Draw();
             break;
-        case 3: // ����� ������
+        case 3: // Смена игрока
             while(EnterName());
             playerNameFont->ChangeText(playerName);
             break;
     }
     Draw();
     Tips SaverTip;
-    SaverTip.ChangeTipText("Для передвижения по меню используйте клавиши: вверх/вниз.");
+    SaverTip.ChangeTipText("Р”Р»СЏ РїРµСЂРµРґРІРёР¶РµРЅРёСЏ РїРѕ РјРµРЅСЋ РёСЃРїРѕР»СЊР·СѓР№С‚Рµ РєР»Р°РІРёС€Рё: РІРІРµСЂС…/РІРЅРёР·.");
 
         return 0;
 }
@@ -355,7 +355,7 @@ Tips::Draw(){
         Bmask = mainSurface->format->Bmask;
         urgentSurface = SDL_CreateRGBSurface(SDL_SWSURFACE|SDL_SRCALPHA,objRectData.w, objRectData.h, 32,Rmask, Gmask, Bmask, 0);
     }
-    SDL_BlitSurface(background, NULL, urgentSurface, NULL); // ��������� ����
+    SDL_BlitSurface(background, NULL, urgentSurface, NULL); // отрисовка фона
     fontPointer->Draw(urgentSurface);
     if(mainSurface) SDL_BlitSurface(urgentSurface, NULL, mainSurface, &objRectData);
     return 0;
@@ -491,12 +491,12 @@ Collision(SDL_Rect A, SDL_Rect B){
     int rightA, rightB;
     int topA, topB;
     int bottomA, bottomB;
-    // ��������� ������� ������ �
+    // Вычисляем стороны фигуры А
     leftA = A.x;
     rightA = A.x + A.w;
     topA = A.y;
     bottomA = A.y + A.h;
-    // ��������� ������� ������ �
+    // Вычисляем стороны фигуры В
     leftB = B.x;
     rightB = B.x + B.w;
     topB = B.y;
@@ -568,11 +568,11 @@ void
 Results::ShowResult(char* printName, int printRes){
     text_color = {255,255,255,0};
     char tmpText[10]="";
-    // ���
+    // ФОН
     SDL_Surface* tmpImgSurf = IMG_Load("saver.gif");
     SDL_BlitSurface(tmpImgSurf, NULL, mainSurface, NULL);
-    // �����
-    char ttext[50] = "Ваш результат:  "; // ������� �� ���������
+    // ТЕКСТ
+    char ttext[50] = "Р’Р°С€ СЂРµР·СѓР»СЊС‚Р°С‚:  "; // Охотник за кроликами
     itoa(printRes, tmpText, 10);
     strcat(ttext, tmpText);
     fontPointer = new Font(WINDOW_W/4+10,WINDOW_H/2, 30, mainTTFname, ttext, &text_color);
@@ -580,9 +580,9 @@ Results::ShowResult(char* printName, int printRes){
     delete fontPointer;
 
     Tips SaverTip;
-    SaverTip.ChangeTipText("Ожидайте перехода в меню."); // ��������...
+    SaverTip.ChangeTipText("РћР¶РёРґР°Р№С‚Рµ РїРµСЂРµС…РѕРґР° РІ РјРµРЅСЋ."); // Загрузка...
 
-    SDL_Flip(mainSurface); // ����������, ��� ����������� �������� ����������� �� ������
+    SDL_Flip(mainSurface); // обновление, для отображения основной поверхности на экране
     SDL_Delay(5000);
     SDL_FreeSurface(tmpImgSurf);
 }
@@ -605,11 +605,11 @@ int
 Results::Draw(){
     text_color = {200,200,200,0};
     char tmpText[10]="";
-    // ���
+    // ФОН
     SDL_Surface* tmpImgSurf = IMG_Load("saver.gif");
     SDL_BlitSurface(tmpImgSurf, NULL, mainSurface, NULL);
-    // �����
-    char ttext[50] = "10 лучших результатов:";
+    // ТЕКСТ
+    char ttext[50] = "10 Р»СѓС‡С€РёС… СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ:";
     Font * tmpFontRes = new Font(WINDOW_W/4+10,160-23, 24, mainTTFname, ttext, &text_color);
     tmpFontRes->Draw(mainSurface);
     delete tmpFontRes;
@@ -627,9 +627,9 @@ Results::Draw(){
         delete tmpFontRes;
     }
     Tips SaverTip;
-    SaverTip.ChangeTipText("Ожидайте перехода в меню."); // ��������...
+    SaverTip.ChangeTipText("РћР¶РёРґР°Р№С‚Рµ РїРµСЂРµС…РѕРґР° РІ РјРµРЅСЋ."); // Загрузка...
 
-    SDL_Flip(mainSurface); // ����������, ��� ����������� �������� ����������� �� ������
+    SDL_Flip(mainSurface); // обновление, для отображения основной поверхности на экране
     SDL_Delay(5000);
     SDL_FreeSurface(tmpImgSurf);
 
@@ -638,44 +638,44 @@ Results::Draw(){
 
 Rules::Rules(){
     text_color = {255,255,255,0};
-    // ���
+    // ФОН
     SDL_Surface* tmpImgSurf = IMG_Load("saver.gif");
     SDL_BlitSurface(tmpImgSurf, NULL, mainSurface, NULL);
 
-    char ttext[256] = "По периметру \"комнаты\" кролики случайным образом прогрызают ";
+    char ttext[256] = "РџРѕ РїРµСЂРёРјРµС‚СЂСѓ \"РєРѕРјРЅР°С‚С‹\" РєСЂРѕР»РёРєРё СЃР»СѓС‡Р°Р№РЅС‹Рј РѕР±СЂР°Р·РѕРј РїСЂРѕРіСЂС‹Р·Р°СЋС‚ ";
     Font * tmpFontRes = new Font(50,23, 18, mainTTFname, ttext, &text_color);
     tmpFontRes->Draw(mainSurface);
     delete tmpFontRes;
 
-    strcpy(ttext, "норки и кратковременно остаются в них. С помощью клавиш ");
+    strcpy(ttext, "РЅРѕСЂРєРё Рё РєСЂР°С‚РєРѕРІСЂРµРјРµРЅРЅРѕ РѕСЃС‚Р°СЋС‚СЃСЏ РІ РЅРёС…. РЎ РїРѕРјРѕС‰СЊСЋ РєР»Р°РІРёС€ ");
     tmpFontRes = new Font(50,20*2, 18, mainTTFname, ttext, &text_color);
     tmpFontRes->Draw(mainSurface);
     delete tmpFontRes;
 
-    strcpy(ttext, "управления (стрелки) игрок передвигает охотника. Нажатие ");
+    strcpy(ttext, "СѓРїСЂР°РІР»РµРЅРёСЏ (СЃС‚СЂРµР»РєРё) РёРіСЂРѕРє РїРµСЂРµРґРІРёРіР°РµС‚ РѕС…РѕС‚РЅРёРєР°. РќР°Р¶Р°С‚РёРµ ");
     tmpFontRes = new Font(50,20*3, 18, mainTTFname, ttext, &text_color);
     tmpFontRes->Draw(mainSurface);
     delete tmpFontRes;
 
-    strcpy(ttext, "клавиш \"Пробел\" соответсвует выстрелу. Пуля летит в направлении, ");
+    strcpy(ttext, "РєР»Р°РІРёС€ \"РџСЂРѕР±РµР»\" СЃРѕРѕС‚РІРµС‚СЃРІСѓРµС‚ РІС‹СЃС‚СЂРµР»Сѓ. РџСѓР»СЏ Р»РµС‚РёС‚ РІ РЅР°РїСЂР°РІР»РµРЅРёРё, ");
     tmpFontRes = new Font(50,20*4, 18, mainTTFname, ttext, &text_color);
     tmpFontRes->Draw(mainSurface);
     delete tmpFontRes;
 
-    strcpy(ttext, "определяемом положением ружья. Цель игры — отстрелить как");
+    strcpy(ttext, "РѕРїСЂРµРґРµР»СЏРµРјРѕРј РїРѕР»РѕР¶РµРЅРёРµРј СЂСѓР¶СЊСЏ. Р¦РµР»СЊ РёРіСЂС‹ вЂ” РѕС‚СЃС‚СЂРµР»РёС‚СЊ РєР°Рє");
     tmpFontRes = new Font(50,20*5, 18, mainTTFname, ttext, &text_color);
     tmpFontRes->Draw(mainSurface);
     delete tmpFontRes;
 
-    strcpy(ttext, "можно больше кроликов за 1 минуту.");
+    strcpy(ttext, "РјРѕР¶РЅРѕ Р±РѕР»СЊС€Рµ РєСЂРѕР»РёРєРѕРІ Р·Р° 1 РјРёРЅСѓС‚Сѓ.");
     tmpFontRes = new Font(50,20*6, 18, mainTTFname, ttext, &text_color);
     tmpFontRes->Draw(mainSurface);
     delete tmpFontRes;
 
     Tips SaverTip;
-    SaverTip.ChangeTipText("Ожидайте перехода в меню."); // ��������...
+    SaverTip.ChangeTipText("РћР¶РёРґР°Р№С‚Рµ РїРµСЂРµС…РѕРґР° РІ РјРµРЅСЋ."); // Загрузка...
 
-    SDL_Flip(mainSurface); // ����������, ��� ����������� �������� ����������� �� ������
+    SDL_Flip(mainSurface); // обновление, для отображения основной поверхности на экране
     SDL_Delay(8000);
     SDL_FreeSurface(tmpImgSurf);
 

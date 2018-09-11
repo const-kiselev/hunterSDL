@@ -44,9 +44,9 @@ Hunter::Draw(SDL_Surface* surf){
 
 int
 Hunter::Move(bool data){
-   // data: если TRUE, то вниз, если FALSE, то вверх
+   // data: РµСЃР»Рё TRUE, С‚Рѕ РІРЅРёР·, РµСЃР»Рё FALSE, С‚Рѕ РІРІРµСЂС…
     posOnScreen.y += (data?1:(-1)) * yVel;
-    // Проверка на выход за пределы окна
+    // РџСЂРѕРІРµСЂРєР° РЅР° РІС‹С…РѕРґ Р·Р° РїСЂРµРґРµР»С‹ РѕРєРЅР°
     if( ( posOnScreen.y < 0 ) || ( posOnScreen.y + objRectData.h > WINDOW_H ) || (!Collision( posOnScreen, wall ) ) )
         posOnScreen.y -= (data?1:(-1)) * yVel;
     return 0;
@@ -90,7 +90,7 @@ Bullet::Draw(SDL_Surface* surf){
 int
 Bullet::Move(bool data){
     posOnScreen.x += (data?1:(-1)) * xVel;
-    // Проверка на выход за пределы окна
+    // РџСЂРѕРІРµСЂРєР° РЅР° РІС‹С…РѕРґ Р·Р° РїСЂРµРґРµР»С‹ РѕРєРЅР°
     if( ( posOnScreen.x < 0 ) || ( posOnScreen.x + objRectData.w > WINDOW_W ) || (!Collision( posOnScreen, wall ) ) )
     {
         posOnScreen.x -= (data?1:(-1)) * xVel;
